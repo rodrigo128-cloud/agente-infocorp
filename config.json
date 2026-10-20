@@ -1,0 +1,7 @@
+{
+  "min_ofertas": 2,
+  "tipo_cambio_gs": 6300,
+  "factor_precio": 1.43,
+  "precio_base": "minimo",
+  "redondeo_gs": 1000
+}

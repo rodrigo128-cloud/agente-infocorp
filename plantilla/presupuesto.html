@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Presupuesto {{NUMERO}}</title>
+<style>
+  @page { size: A4; margin: 10mm 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #1d1e22; background: #fff;
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 210mm; padding: 0 15mm; }
+  .mono { font-family: "Consolas", "Courier New", monospace; }
+  .topbar { background: #1d1e22; color: #fff; text-align: center; font-size: 10px; letter-spacing: 1px;
+            padding: 7px 0; }
+  .header { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px; }
+  .brand img { width: 320px; display: block; }
+  .brand .contact { color: #6b6e75; font-size: 12px; margin: 4px 0 0 8px; line-height: 1.4; }
+  .brand .contact .mono { color: #6b6e75; }
+  .docbox { background: #1d1e22; border-left: 5px solid #e4002b; color: #fff; width: 250px;
+            padding: 18px 14px; text-align: right; min-height: 130px; }
+  .docbox h1 { margin: 0; font-size: 20px; }
+  .docbox .num { color: #e4002b; font-weight: bold; font-size: 14px; margin-top: 4px; }
+  .docbox .fecha { color: #a8abb2; font-size: 15px; margin-top: 10px; }
+  .divider { margin: 20px 0 22px; border-bottom: 1px solid #c9c9c9; height: 8px;
+             background: radial-gradient(circle, #e4002b 1.2px, transparent 1.5px) 0 2px / 52px 8px repeat-x; }
+  .cliente { background: #f4f3f2; padding: 12px 6px; }
+  .cliente .row { display: flex; align-items: baseline; margin: 3px 0; }
+  .cliente .lbl { border-left: 4px solid #e4002b; padding-left: 8px; font-weight: bold; font-size: 15px;
+                  min-width: 105px; }
+  .cliente .val { font-family: "Times New Roman", serif; font-size: 15px; }
+  .cliente .intro { color: #8a8a8a; font-style: italic; font-family: "Times New Roman", serif; font-size: 15px;
+                    margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 12.5px; }
+  thead th { background: #1d1e22; color: #fff; font-family: "Consolas", monospace; font-size: 11px;
+             padding: 14px 10px; text-align: left; border-bottom: 4px solid #e4002b; border-right: 1px solid #fff; }
+  thead th.r { text-align: right; } thead th.c { text-align: center; }
+  thead th:last-child { border-right: none; }
+  tbody td { padding: 4px 6px; border: 1px solid #d0d0d0; height: 20px; vertical-align: middle; }
+  tbody tr:nth-child(odd) td { background: #f4f4f4; } tbody tr:nth-child(even) td { background: #dcdcdc; }
+  tr { break-inside: avoid; }
+  thead { display: table-header-group; }  /* el encabezado se repite en cada hoja */
+  .totales, .condiciones, .despedida { break-inside: avoid; }
+  td.cant { text-align: center; width: 80px; } td.pu, td.tot { text-align: right; white-space: nowrap; }
+  td.pu { width: 125px; } td.tot { width: 112px; }
+  .totales { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 4px; }
+  .nota { color: #8a8a8a; font-style: italic; font-family: "Times New Roman", serif; font-size: 12px;
+          margin: 12px 0 0 75px; }
+  .totalbox { background: #1d1e22; border-left: 5px solid #e4002b; color: #fff; width: 365px; padding: 16px 10px;
+              text-align: right; font-size: 21px; font-weight: bold; }
+  .condiciones { background: #f4f3f2; margin-top: 16px; padding: 14px 12px; }
+  .condiciones div { margin: 2px 0; font-family: "Times New Roman", serif; font-size: 14px; }
+  .condiciones b { font-family: "Consolas", monospace; font-size: 14px; margin-right: 8px; }
+  .observaciones { margin-top: 10px; padding: 12px 12px 6px; border-left: 4px solid #e4002b; background: #f4f3f2;
+                   font-family: "Times New Roman", serif; font-size: 12.5px; break-inside: avoid; }
+  .observaciones b { font-family: "Consolas", monospace; font-size: 13px; }
+  .observaciones ul { margin: 6px 0 0 18px; padding: 0; }
+  .observaciones li { margin: 2px 0; }
+  .cierre { font-family: "Times New Roman", serif; font-size: 14px; margin: 16px 12px 0; line-height: 1.6; }
+  .firma { border-top: 1px solid #a0a0a0; margin-top: 12px; padding-top: 4px; font-family: "Times New Roman", serif; }
+  .firma .emp { font-weight: bold; font-size: 14px; }
+  .firma .slogan { color: #8a8a8a; font-style: italic; font-size: 11px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar mono">TECNOLOGÍA &nbsp;·&nbsp; INNOVACIÓN &nbsp;·&nbsp; TRAYECTORIA EN EL MERCADO</div>
+
+  <div class="header">
+    <div class="brand">
+      <img src="{{LOGO}}" alt="Infocorp Enterprise S.R.L.">
+      <div class="contact">
+        <span style="font-family:'Times New Roman',serif">Yataity Cora 653, Fdo. de la Mora -- Paraguay</span><br>
+        info@infocorp.com.py &nbsp;<span class="mono">+595 972 653 805</span>
+      </div>
+    </div>
+    <div class="docbox">
+      <h1>PRESUPUESTO</h1>
+      <div class="num mono">N.° {{NUMERO}}</div>
+      <div class="fecha mono">{{DIA}} &nbsp;/ {{MES}} / {{ANIO}}</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cliente">
+    <div class="row"><span class="lbl">SEÑORES</span><span class="val">{{CLIENTE}}</span></div>
+    <div class="row"><span class="lbl">ATENCIÓN</span><span class="val">{{ATENCION}}</span></div>
+    <div class="intro">De acuerdo a su pedido, presentamos la siguiente cotización:</div>
+  </div>
+
+  <table>
+    <thead><tr>
+      <th class="c">CANT.</th><th>DESCRIPCIÓN</th><th class="c">PRECIO UNIT.</th><th class="r">TOTAL</th>
+    </tr></thead>
+    <tbody>
+{{FILAS}}
+    </tbody>
+  </table>
+
+  <div class="totales">
+    <div class="nota">· {{NOTA_IVA}}</div>
+    <div class="totalbox">TOTAL: <span class="mono">{{TOTAL}}</span></div>
+  </div>
+
+  <div class="condiciones">
+    <div><b>GARANTÍA</b>{{GARANTIA}}</div>
+    <div><b>PLAZO_ENTREGA</b>{{PLAZO_ENTREGA}}</div>
+    <div><b>FORMA_PAGO</b>{{FORMA_PAGO}}</div>
+    <div><b>VALIDEZ</b>{{VALIDEZ}}</div>
+  </div>
+
+  {{OBSERVACIONES}}
+
+  <div class="despedida">
+    <div class="cierre">
+      Gracias por darnos la oportunidad de acompañarlos. Quedamos a disposición para cualquier consulta.<br>
+      Atentamente,
+    </div>
+    <div class="firma">
+      <div class="emp">Infocorp Enterprise S.R.L.</div>
+      <div class="slogan">Tecnología con trayectoria — soluciones informáticas para tu empresa</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Presupuestos generados (datos de clientes): quedan en cada máquina, no en el repositorio
+presupuestos/*.pdf
+presupuestos/*.html
+presupuestos/_datos.json
+
+# Python
+__pycache__/
+*.pyc
+
+# Configuración local de Claude Code
+.claude/settings.local.json
